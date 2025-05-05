@@ -1,0 +1,27 @@
+name: Deploy
+
+# Trigger workflow on push or pull request events on main branch
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+# Authenticate to the server via ssh
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up SSH
+        uses: tiyee/action-ssh@release
+        with:
+          host: ${{ secrests.HOST }}
+          port: ${{ secrets.PORT }}
+          username: ${{ secrets.USERNAME }}
+          privateKey: ${{ secrets.PRIVATE_KEY }}
+          command: "cd api-anxiety.studyatsac.com && ./.scripts/deploy.sh"
