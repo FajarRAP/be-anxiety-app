@@ -14,10 +14,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::factory()->create([
+        $user = User::create([
             'username' => 'test',
             'password' => bcrypt('password'),
         ]);
+
         DB::table('profiles')->insert(['user_id' => $user->id]);
 
         $this->call([
