@@ -18,9 +18,9 @@ class QuizHistoryController extends Controller
                 fn($quizzes) =>
                 [
                     'created_at' => $quizzes->first()->created_at,
+                    'user' => $quizzes->first()->user->toResource(),
                     'result' => collect($quizzes)->map(fn($item) => [
                         'id' => $item->id,
-                        'user' => $item->user->toResource(),
                         'quiz_type' => $item->quizType->toResource(),
                         'score' => $item->score,
                         'material' => $item->material,

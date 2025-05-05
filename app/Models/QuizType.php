@@ -10,4 +10,9 @@ class QuizType extends Model
     {
         return $this->hasMany(Quiz::class);
     }
+
+    public function quizHistories()
+    {
+        return $this->hasMany(QuizHistory::class);
+    }
 }

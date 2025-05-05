@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Profile::class);
     }
+
+    public function quizHistories()
+    {
+        return $this->hasMany(QuizHistory::class);
+    }
 }
