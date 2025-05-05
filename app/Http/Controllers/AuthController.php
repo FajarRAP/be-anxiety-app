@@ -58,9 +58,16 @@ class AuthController extends Controller
         }
 
         $user = User::where('username', $request->username)->first();
+
+        if (!$user) {
+            return response()->json([
+                'message' => 'User not found'
+            ], 404);
+        }
+
         $checkPassword = Hash::check($request->password, $user->password);
 
-        if (!$user || !$checkPassword) {
+        if (!$checkPassword) {
             return response()->json([
                 'message' => 'Invalid credentials'
             ], 401);
