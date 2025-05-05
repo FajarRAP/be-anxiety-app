@@ -17,12 +17,12 @@ class QuizResource extends JsonResource
         return $this->title == null ? [
             'id' => $this->id,
             'question' => $this->question,
-            'type' => $this->quizType->toResource(),
+            'quiz_type' => $this->quizType->toResource(),
         ] : [
             'id' => $this->id,
             'title' => $this->title,
             'question' => $this->question,
-            'type' => $this->quizType->toResource(),
+            'quiz_type' => $this->quizType->toResource(),
         ];
     }
 }
