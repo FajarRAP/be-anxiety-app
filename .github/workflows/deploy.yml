@@ -24,4 +24,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          script: "cd api-anxiety.studyatsac.com && ./.scripts/deploy.sh"
+          script: "cd anxiety-app-be && ./.scripts/deploy.sh"
