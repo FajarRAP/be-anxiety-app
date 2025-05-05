@@ -4,11 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Profile;
 use App\Models\User;
-use App\Models\UserDetail;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Console\Scheduling\Event;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
@@ -87,6 +84,16 @@ class AuthController extends Controller
             'data' => [
                 'user' => $user->toResource(),
             ],
+        ]);
+    }
+
+    public function logout(Request $request)
+    {
+        $user = $request->user();
+        $user->tokens()->delete();
+
+        return response()->json([
+            'message' => 'User logged out successfully',
         ]);
     }
 }
