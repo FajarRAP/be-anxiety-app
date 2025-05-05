@@ -19,7 +19,7 @@ class QuizHistoryController extends Controller
                 [
                     'created_at' => $quizzes->first()->created_at,
                     'user' => $quizzes->first()->user->toResource(),
-                    'result' => collect($quizzes)->map(fn($item) => [
+                    'results' => collect($quizzes)->map(fn($item) => [
                         'id' => $item->id,
                         'quiz_type' => $item->quizType->toResource(),
                         'score' => $item->score,
@@ -36,13 +36,13 @@ class QuizHistoryController extends Controller
         $quizzes = collect($request->input('quizzes'));
         $quizSession = bcrypt($request->user()->id . now());
 
-        $histories = collect([]);
+        $results = collect([]);
         foreach ($quizTypes as $quizType) {
             $score = $quizzes
                 ->filter(fn($item) => $item['quiz_type_id'] == $quizType->id)
                 ->reduce(fn(int $carry, $item): float => $carry + $item['answer'], 0);
 
-            $history = QuizHistory::create([
+            $result = QuizHistory::create([
                 'session' => $quizSession,
                 'user_id' => $request->user()->id,
                 'quiz_type_id' => $quizType->id,
@@ -53,12 +53,21 @@ class QuizHistoryController extends Controller
                 'updated_at' => $now,
             ]);
 
-            $histories->push($history);
+            $results->push($result);
         }
 
         return response()->json([
             'message' => 'Success calculate quiz score',
-            'data' => $histories,
+            'data' => [
+                'created_at' => $now,
+                'user' => $request->user()->toResource(),
+                'results' => $results->map(fn($item) => [
+                    'id' => $item->id,
+                    'quiz_type' => $item->quizType->toResource(),
+                    'score' => $item->score,
+                    'material' => $item->material,
+                ])
+            ],
         ], 201);
     }
 }
