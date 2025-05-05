@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 
 class QuizHistoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $histories = QuizHistory::all()->groupBy('session')->values();
+        $histories = $request->user()->quizHistories()->get()->groupBy('session')->values();
 
         return response()->json([
             'message' => 'Success retrieve quiz history',
