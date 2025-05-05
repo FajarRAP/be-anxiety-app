@@ -96,4 +96,38 @@ class AuthController extends Controller
             'message' => 'User logged out successfully',
         ]);
     }
+
+    public function updateProfile(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => ['nullable', 'string'],
+            'age' => ['nullable', 'integer'],
+            'height' => ['nullable', 'decimal'],
+            'weight' => ['nullable', 'decimal'],
+            'genders' => ['nullable', 'string'],
+            'education' => ['nullable', 'string'],
+            'occupation' => ['nullable', 'string'],
+            'marriage' => ['nullable', 'string'],
+            'duration' => ['nullable', 'string'],
+            'history' => ['nullable', 'string'],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        $user = $request->user();
+        $profile = $user->profile;
+
+        $profile->update($request->all());
+
+        return response()->json([
+            'message' => 'Profile updated successfully',
+            'data' => [
+                'user' => $user->toResource(),
+            ],
+        ]);
+    }
 }

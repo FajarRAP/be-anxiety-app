@@ -11,4 +11,5 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/auth/login', 'login');
     Route::post('/auth/logout', 'logout')->middleware('auth:sanctum');
     Route::get('/auth/user', 'user')->middleware('auth:sanctum');
+    Route::put('/auth/user', 'updateProfile')->middleware('auth:sanctum');
 });
