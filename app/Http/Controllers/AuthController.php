@@ -109,8 +109,8 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => ['nullable', 'string'],
             'age' => ['nullable', 'integer'],
-            'height' => ['nullable', 'decimal'],
-            'weight' => ['nullable', 'decimal'],
+            'height' => ['nullable', 'numeric'],
+            'weight' => ['nullable', 'numeric'],
             'genders' => ['nullable', 'string'],
             'education' => ['nullable', 'string'],
             'occupation' => ['nullable', 'string'],
