@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('age')->nullable();
             $table->float('height')->nullable();
             $table->float('weight')->nullable();
-            $table->string('genders')->nullable();
+            $table->string('gender')->nullable();
             $table->string('education')->nullable();
             $table->string('occupation')->nullable();
             $table->string('marriage')->nullable();
