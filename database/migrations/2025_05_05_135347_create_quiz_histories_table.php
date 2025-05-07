@@ -12,14 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('quiz_histories', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->string('session');
             $table->foreignUuid('user_id')
-                ->constrained(table: 'users', column: 'id', indexName: 'id')
+                ->constrained()
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->foreignUuid('quiz_type_id')
-                ->constrained(table: 'quiz_types', column: 'id', indexName: 'id')
+                ->constrained()
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->float('score');
