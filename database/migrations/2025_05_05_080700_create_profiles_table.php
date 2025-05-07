@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->uuid('id');
             $table->foreignUuid('user_id')
-                ->constrained()
+                ->constrained(table: 'users', column: 'id', indexName: 'id')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->string('name')->nullable();

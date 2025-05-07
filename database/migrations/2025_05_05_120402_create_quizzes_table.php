@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('quizzes', function (Blueprint $table) {
             $table->uuid('id');
             $table->foreignUuid('quiz_type_id')
-                ->constrained()
+                ->constrained(table: 'quiz_types', column: 'id', indexName: 'id')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->string('title')->nullable();

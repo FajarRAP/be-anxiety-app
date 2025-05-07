@@ -15,11 +15,11 @@ return new class extends Migration
             $table->uuid('id');
             $table->string('session');
             $table->foreignUuid('user_id')
-                ->constrained()
+                ->constrained(table: 'users', column: 'id', indexName: 'id')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->foreignUuid('quiz_type_id')
-                ->constrained()
+                ->constrained(table: 'quiz_types', column: 'id', indexName: 'id')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->float('score');
