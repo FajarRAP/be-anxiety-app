@@ -21,10 +21,10 @@ return new class extends Migration
             $table->integer('age')->nullable();
             $table->float('height')->nullable();
             $table->float('weight')->nullable();
-            $table->enum('genders', ['MALE', 'FEMALE'])->nullable();
-            $table->enum('education', ['SD', 'SMP', 'SMA', 'D1', 'D2', 'D3', 'D4', 'S1', 'S2', 'S3', 'NONE'])->nullable();
+            $table->string('genders')->nullable();
+            $table->string('education')->nullable();
             $table->string('occupation')->nullable();
-            $table->enum('marriage', ['KAWIN', 'BELUM KAWIN', 'CERAI HIDUP', 'CERAI MATI'])->nullable();
+            $table->string('marriage')->nullable();
             $table->string('duration')->nullable();
             $table->string('history')->nullable();
             $table->timestamps();
