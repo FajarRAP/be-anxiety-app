@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Profile;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,7 +19,9 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password'),
         ]);
 
-        DB::table('profiles')->insert(['user_id' => $user->id]);
+        Profile::create([
+            'user_id' => $user->id,
+        ]);
 
         $this->call([
             QuizTypeSeeder::class,

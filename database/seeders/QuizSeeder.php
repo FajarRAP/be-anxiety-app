@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Quiz;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class QuizSeeder extends Seeder
 {
@@ -13,7 +13,7 @@ class QuizSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('quizzes')->insert([
+        $datas = collect([
             ['quiz_type_id' => 1, 'title' => 'Perasaan cemas', 'question' => 'Cemas'],
             ['quiz_type_id' => 1, 'title' => 'Perasaan cemas', 'question' => 'Firasat Buruk'],
             ['quiz_type_id' => 1, 'title' => 'Perasaan cemas', 'question' => 'Takut Akan Pikiran Sendiri'],
@@ -137,5 +137,7 @@ class QuizSeeder extends Seeder
             ['quiz_type_id' => 3, 'title' => null, 'question' => 'Seberapa sering anda merasa diabetes membatasi karir anda?'],
             ['quiz_type_id' => 3, 'title' => null, 'question' => 'Seberapa sering anda mengalami sakit secara fisik karena diabetes anda?'],
         ]);
+
+        $datas->each(fn($item) => Quiz::create($item));
     }
 }

@@ -12,14 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('quiz_histories', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id');
             $table->string('session');
-            $table->foreignId('user_id')
-                ->constrained()
+            $table->string('user_id')->references('id')->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->foreignId('quiz_type_id')
-                ->constrained()
+            $table->string('quiz_type_id')->references('id')->on('quiz_types')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->float('score');

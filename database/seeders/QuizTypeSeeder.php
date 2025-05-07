@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\QuizType;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class QuizTypeSeeder extends Seeder
 {
@@ -13,10 +13,12 @@ class QuizTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('quiz_types')->insert([
+        $datas = collect([
             ['type' => 'Hamilton Anxiety Rating Scale (HARS)'],
             ['type' => 'Multidimensional Scale of Perceivced Social Support (MSPSS)'],
             ['type' => 'Quality of Life'],
         ]);
+
+        $datas->each(fn($data) => QuizType::create($data));
     }
 }
