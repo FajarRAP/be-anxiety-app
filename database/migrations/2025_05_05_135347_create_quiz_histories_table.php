@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('quiz_histories', function (Blueprint $table) {
             $table->uuid('id');
             $table->string('session');
-            $table->string('user_id')->references('id')->on('users')
+            $table->foreignUuid('user_id')
+                ->constrained()
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->string('quiz_type_id')->references('id')->on('quiz_types')
+            $table->foreignUuid('quiz_type_id')
+                ->constrained()
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->float('score');

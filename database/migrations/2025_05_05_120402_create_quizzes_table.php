@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('quizzes', function (Blueprint $table) {
             $table->uuid('id');
-            $table->string('quiz_type_id')
-                ->references('id')
-                ->on('quiz_types')
+            $table->foreignUuid('quiz_type_id')
+                ->constrained()
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->string('title')->nullable();
