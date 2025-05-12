@@ -111,7 +111,7 @@ class AuthController extends Controller
             'age' => ['nullable', 'integer'],
             'height' => ['nullable', 'numeric'],
             'weight' => ['nullable', 'numeric'],
-            'genders' => ['nullable', 'string'],
+            'gender' => ['nullable', 'string'],
             'education' => ['nullable', 'string'],
             'occupation' => ['nullable', 'string'],
             'marriage' => ['nullable', 'string'],

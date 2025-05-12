@@ -19,7 +19,7 @@ class ProfileResource extends JsonResource
             'age' => $this->age,
             'height' => $this->height,
             'weight' => $this->weight,
-            'genders' => $this->genders,
+            'gender' => $this->gender,
             'education' => $this->education,
             'occupation' => $this->occupation,
             'marriage' => $this->marriage,
