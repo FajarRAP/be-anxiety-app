@@ -33,24 +33,19 @@ class QuizHistoryController extends Controller
     {
         $now = now();
         $quizTypes = QuizType::all();
-        $quizzes = collect($request->input('quizzes'));
+        $payload = collect($request->all());
         $quizSession = bcrypt($request->user()->id . now());
 
         $results = collect([]);
-        foreach ($quizTypes as $quizType) {
-            $score = $quizzes
-                ->filter(fn($item) => $item['quiz_type_id'] == $quizType->id)
-                ->reduce(fn(int $carry, $item): float => $carry + $item['answer'], 0);
-
+        foreach ($payload as $key => $data) {
+            $score = collect($data['values'])
+                ->reduce(fn($carry, $item) => $carry + $item, 0);
             $result = QuizHistory::create([
                 'session' => $quizSession,
                 'user_id' => $request->user()->id,
-                'quiz_type_id' => $quizType->id,
-                'score' => $quizType->id == 1 ?
-                    $score / 14 : ($quizType->id == 2 ? $score / 12 : $score),
+                'quiz_type_id' => $data['quiz_type_id'],
+                'score' => $data['quiz_type_id'] == $quizTypes[1]->id ? $score / 12 : $score,
                 'material' => 'https://studyatsac.com/',
-                'created_at' => $now,
-                'updated_at' => $now,
             ]);
 
             $results->push($result);
