@@ -38,8 +38,10 @@ class QuizHistoryController extends Controller
 
         $results = collect([]);
         foreach ($payload as $key => $data) {
+
             $score = collect($data['values'])
-                ->reduce(fn($carry, $item) => $carry + $item, 0);
+                ->reduce(fn($carry, $item)
+                => $carry + ($key == 0 ? $item : $item + 1), 0);
             $result = QuizHistory::create([
                 'session' => $quizSession,
                 'user_id' => $request->user()->id,
