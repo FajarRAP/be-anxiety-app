@@ -18,6 +18,8 @@ class QuizController extends Controller
             'question' => $quiz->question,
         ])->values();
 
+        $often = $quizzes->get($quizTypes[2]->id)->splice(7);
+
         return response()->json([
             'message' => 'Success retrieve quizzes',
             'data' => [
@@ -45,12 +47,12 @@ class QuizController extends Controller
                     ],
                     'quizzes' => [
                         [
-                            'type' => 'often',
-                            'questions' => $mapQuizzes($quizzes->get($quizTypes[2]->id)->splice(7)),
-                        ],
-                        [
                             'type' => 'satisfcation',
                             'questions' => $mapQuizzes($quizzes->get($quizTypes[2]->id)),
+                        ],
+                        [
+                            'type' => 'often',
+                            'questions' => $mapQuizzes($often),
                         ],
                     ],
                 ],
