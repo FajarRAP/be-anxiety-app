@@ -77,7 +77,7 @@ class QuizHistoryController extends Controller
                     : ($item->score < 27 ? ['status' => 'Sedang', 'image_path' => 'sedang.png']
                         : ($item->score < 41 ? ['status' => 'Berat', 'image_path' => 'berat.png']
                             : ['status' => 'Sangat Berat', 'image_path' => 'stress.png']))),
-            1 => $item->score >= 1.0 && $item->score < 3.0 ? ['status' => 'Dukungan Sosial Rendah', 'image_path' => 'rendah.png']
+            1 => $item->score >= 1.0 && $item->score < 3.0 ? ['status' => 'Dukungan Sosial Rendah', 'image_path' => 'berat.png']
                 : ($item->score >= 3.0 && $item->score < 5.0 ? ['status' => 'Dukungan Sosial Sedang', 'image_path' => 'sedang.png']
                     : ['status' => 'Dukungan Sosial Sangat Tinggi', 'image_path' => 'happykiyowo.png']),
             2 => $item->score < 45 ? ['status' => 'Baik', 'image_path' => 'happykiyowo.png'] : ['status' => 'Kurang Baik', 'image_path' => 'berat.png'],
